@@ -1,4 +1,4 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -13,8 +13,7 @@ class Settings(BaseSettings):
     LOG_FILE: str = "logs/app.log"
     TIMEOUT_SECONDS: int = 20
 
-    class Config:
-        env_prefix = "APP_"
+    model_config = SettingsConfigDict(env_prefix="APP_")
 
 
 settings = Settings()

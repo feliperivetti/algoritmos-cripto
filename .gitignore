@@ -3,3 +3,8 @@ __pycache__/
 .env
 venv/
 .devcontainer
+logs/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.log

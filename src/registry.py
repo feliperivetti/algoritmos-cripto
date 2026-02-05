@@ -44,12 +44,14 @@ def load_algorithms() -> None:
     from src.models.fermat import FermatModel
     from src.models.modular_exp import ModularExpModel
     from src.models.pseudoprimo_forte import PseudoPrimoForteModel
+    from src.models.teorema_chines import TeoremaChinesModel
     from src.views.achar_fator_view import AcharFatorView
     from src.views.diofantina_view import DiofantinaView
     from src.views.euclides_view import EuclidesView
     from src.views.fermat_view import FermatView
     from src.views.modular_exp_view import ModularExpView
     from src.views.pseudoprimo_forte_view import PseudoPrimoForteView
+    from src.views.teorema_chines_view import TeoremaChinesView
 
     AlgorithmRegistry.register("Euclides Estendido", EuclidesModel, EuclidesView)
     AlgorithmRegistry.register("Equação Diofantina", DiofantinaModel, DiofantinaView)
@@ -57,3 +59,4 @@ def load_algorithms() -> None:
     AlgorithmRegistry.register("Exponenciação Modular", ModularExpModel, ModularExpView)
     AlgorithmRegistry.register("Achar um Fator", AcharFatorModel, AcharFatorView)
     AlgorithmRegistry.register("Pseudoprimo Forte", PseudoPrimoForteModel, PseudoPrimoForteView)
+    AlgorithmRegistry.register("👲 Teorema Chinês do Resto", TeoremaChinesModel, TeoremaChinesView)
