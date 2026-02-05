@@ -2,59 +2,21 @@ from typing import Type
 
 import streamlit as st
 
-from src.models.achar_fator import AcharFatorModel
 from src.models.base import BaseAlgorithm
-from src.models.diofantina import DiofantinaModel
-from src.models.euclides import EuclidesModel
-from src.models.fermat import FermatModel
-from src.models.modular_exp import ModularExpModel
-from src.models.pseudoprimo_forte import PseudoPrimoForteModel
+from src.registry import AlgorithmRegistry
 from src.validators.input_validators import InputValidator
-from src.views.achar_fator_view import AcharFatorView
 from src.views.base_view import BaseView
-from src.views.diofantina_view import DiofantinaView
-from src.views.euclides_view import EuclidesView
-from src.views.fermat_view import FermatView
-from src.views.modular_exp_view import ModularExpView
-from src.views.pseudoprimo_forte_view import PseudoPrimoForteView
-
-# Registry de algoritmos: mapeia nome → (Model, View)
-ALGORITHMS: dict[str, dict[str, Type]] = {
-    "Euclides Estendido": {
-        "model": EuclidesModel,
-        "view": EuclidesView,
-    },
-    "Equação Diofantina": {
-        "model": DiofantinaModel,
-        "view": DiofantinaView,
-    },
-    "Algoritmo de Fermat": {
-        "model": FermatModel,
-        "view": FermatView,
-    },
-    "Exponenciação Modular": {
-        "model": ModularExpModel,
-        "view": ModularExpView,
-    },
-    "Achar um Fator": {
-        "model": AcharFatorModel,
-        "view": AcharFatorView,
-    },
-    "Pseudoprimo Forte": {
-        "model": PseudoPrimoForteModel,
-        "view": PseudoPrimoForteView,
-    },
-}
 
 
 class AlgorithmController:
     """Controller que orquestra a execução entre Model e View."""
 
     def __init__(self, algorithm_name: str):
-        if algorithm_name not in ALGORITHMS:
-            raise ValueError(f"Algoritmo desconhecido: {algorithm_name}")
+        try:
+            config = AlgorithmRegistry.get(algorithm_name)
+        except ValueError as err:
+            raise ValueError(f"Algoritmo desconhecido: {algorithm_name}") from err
 
-        config = ALGORITHMS[algorithm_name]
         self.model_class: Type[BaseAlgorithm] = config["model"]
         self.view_class: Type[BaseView] = config["view"]
         self.algorithm_name = algorithm_name

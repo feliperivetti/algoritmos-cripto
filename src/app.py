@@ -5,7 +5,11 @@ Entry point para o Streamlit.
 import streamlit as st
 
 from src.algorithm_info import get_algorithm_info
-from src.controllers.algorithm_controller import ALGORITHMS, AlgorithmController
+from src.controllers.algorithm_controller import AlgorithmController
+from src.registry import AlgorithmRegistry, load_algorithms
+
+# Carrega algoritmos
+load_algorithms()
 
 # Configuração da página
 st.set_page_config(
@@ -91,7 +95,7 @@ def main():
     st.caption("Ferramentas para Teoria dos Números")
 
     # Seletor de algoritmo
-    algorithm_list = list(ALGORITHMS.keys())
+    algorithm_list = list(AlgorithmRegistry.get_all().keys())
     selected = st.selectbox(
         "Selecione o algoritmo",
         algorithm_list,
