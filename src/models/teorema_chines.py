@@ -26,7 +26,7 @@ def _extended_gcd_inverse(a: int, m: int) -> int:
         # Não houve troca
         x = result.metadata["alpha"]
 
-    return x % m
+    return int(x) % m
 
 
 class TeoremaChinesModel(BaseAlgorithm):
