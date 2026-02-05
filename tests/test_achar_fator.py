@@ -1,9 +1,6 @@
-"""
-Testes para o algoritmo Achar um Fator (Trial Division).
-"""
-
 import pytest
-from src.models.achar_fator import AcharFatorModel, validate_greater_than_one
+from src.models.achar_fator import AcharFatorModel
+from src.models.validators import validate_greater_than_one
 
 class TestAcharFatorModel:
     """Testes para AcharFatorModel."""

@@ -1,19 +1,6 @@
 import math
 from src.models.base import BaseAlgorithm, AlgorithmResult, ParamConfig
-
-
-def validate_positive(value: int) -> tuple[bool, str]:
-    """Valida que o valor seja positivo."""
-    if value <= 0:
-        return False, "O valor deve ser maior que zero."
-    return True, ""
-
-
-def validate_odd(value: int) -> tuple[bool, str]:
-    """Valida que o valor seja ímpar."""
-    if value % 2 == 0:
-        return False, "O valor deve ser ímpar."
-    return True, ""
+from src.models.validators import validate_odd, validate_positive
 
 
 class FermatModel(BaseAlgorithm):

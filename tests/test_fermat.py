@@ -1,9 +1,6 @@
-"""
-Testes para o Algoritmo de Fermat.
-"""
-
 import pytest
-from src.models.fermat import FermatModel, validate_odd, validate_positive
+from src.models.fermat import FermatModel
+from src.models.validators import validate_odd, validate_positive
 
 
 class TestFermatModel:

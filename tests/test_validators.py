@@ -1,77 +1,64 @@
 """
-Testes para os validadores de input.
+Testes para os validadores centralizados.
 """
-
 import pytest
-from src.validators.input_validators import InputValidator, ValidationResult
-from src.models.base import ParamConfig
+from src.models.validators import (
+    validate_non_zero,
+    validate_positive,
+    validate_greater_than_one,
+    validate_odd
+)
 
+class TestValidators:
+    """Suite de testes para funções de validação."""
 
-class TestInputValidator:
-    """Testes para InputValidator."""
-    
-    def test_validate_int_valido(self):
-        """Testa conversão de inteiro válido."""
-        result = InputValidator.validate_int("42", "N")
-        
-        assert result.is_valid is True
-        assert result.value == 42
-    
-    def test_validate_int_invalido(self):
-        """Testa rejeição de não-inteiro."""
-        result = InputValidator.validate_int("abc", "N")
-        
-        assert result.is_valid is False
-        assert "inteiro" in result.error_message.lower()
-    
-    def test_validate_int_negativo(self):
-        """Testa que inteiros negativos são aceitos."""
-        result = InputValidator.validate_int("-5", "N")
-        
-        assert result.is_valid is True
-        assert result.value == -5
-    
-    def test_validate_param_com_validacoes(self):
-        """Testa validação com múltiplas funções de validação."""
-        def validate_positive(v):
-            return (v > 0, "Deve ser positivo")
-        
-        param = ParamConfig(
-            name="n",
-            label="N",
-            validations=[validate_positive]
-        )
-        
-        # Válido
-        result = InputValidator.validate_param("5", param)
-        assert result.is_valid is True
-        
-        # Inválido
-        result = InputValidator.validate_param("-5", param)
-        assert result.is_valid is False
-    
-    def test_validate_all_sucesso(self):
-        """Testa validação de múltiplos parâmetros."""
-        params = [
-            ParamConfig(name="a", label="A", validations=[]),
-            ParamConfig(name="b", label="B", validations=[]),
-        ]
-        
-        raw_inputs = {"a": "10", "b": "20"}
-        is_valid, result = InputValidator.validate_all(raw_inputs, params)
-        
-        assert is_valid is True
-        assert result["a"] == 10
-        assert result["b"] == 20
-    
-    def test_validate_all_campo_vazio(self):
-        """Testa rejeição de campo vazio."""
-        params = [
-            ParamConfig(name="a", label="A", validations=[]),
-        ]
-        
-        raw_inputs = {"a": ""}
-        is_valid, result = InputValidator.validate_all(raw_inputs, params)
-        
-        assert is_valid is False
-        assert "errors" in result
+    @pytest.mark.parametrize("val, expected", [
+        (1, True),
+        (-1, True),
+        (100, True),
+        (0, False)
+    ])
+    def test_validate_non_zero(self, val, expected):
+        is_valid, msg = validate_non_zero(val)
+        assert is_valid == expected
+        if not expected:
+            assert "não pode ser zero" in msg
+
+    @pytest.mark.parametrize("val, expected", [
+        (1, True),
+        (10, True),
+        (0, False),
+        (-5, False)
+    ])
+    def test_validate_positive(self, val, expected):
+        is_valid, msg = validate_positive(val)
+        assert is_valid == expected
+        if not expected:
+            assert "deve ser positivo" in msg
+
+    @pytest.mark.parametrize("val, expected", [
+        (2, True),
+        (10, True),
+        (1, False),
+        (0, False),
+        (-2, False)
+    ])
+    def test_validate_greater_than_one(self, val, expected):
+        is_valid, msg = validate_greater_than_one(val)
+        assert is_valid == expected
+        if not expected:
+            assert "maior que 1" in msg
+
+    @pytest.mark.parametrize("val, expected", [
+        (3, True),
+        (1, True),
+        (-3, True),
+        (2, False),
+        (0, False),
+        (-4, False)
+    ])
+    def test_validate_odd(self, val, expected):
+        is_valid, msg = validate_odd(val)
+        assert is_valid == expected
+        if not expected:
+            assert "deve ser ímpar" in msg

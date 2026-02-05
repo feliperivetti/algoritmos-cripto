@@ -1,18 +1,5 @@
 from src.models.base import BaseAlgorithm, AlgorithmResult, ParamConfig
-
-
-def validate_greater_than_one(value: int) -> tuple[bool, str]:
-    """Valida que o valor seja maior que 1."""
-    if value <= 1:
-        return False, "O valor deve ser maior que 1."
-    return True, ""
-
-
-def validate_odd(value: int) -> tuple[bool, str]:
-    """Valida que o valor seja ímpar."""
-    if value % 2 == 0:
-        return False, "O valor deve ser ímpar."
-    return True, ""
+from src.models.validators import validate_greater_than_one, validate_odd
 
 
 class PseudoPrimoForteModel(BaseAlgorithm):

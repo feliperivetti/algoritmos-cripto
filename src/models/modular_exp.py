@@ -1,11 +1,5 @@
 from src.models.base import BaseAlgorithm, AlgorithmResult, ParamConfig
-
-
-def validate_non_zero(value: int) -> tuple[bool, str]:
-    """Valida que o valor não seja zero."""
-    if value == 0:
-        return False, "O valor não pode ser zero."
-    return True, ""
+from src.models.validators import validate_non_zero
 
 
 class ModularExpModel(BaseAlgorithm):

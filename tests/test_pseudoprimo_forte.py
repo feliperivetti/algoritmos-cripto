@@ -1,9 +1,6 @@
-"""
-Testes para o algoritmo Pseudoprimo Forte (Miller-Rabin).
-"""
-
 import pytest
-from src.models.pseudoprimo_forte import PseudoPrimoForteModel, validate_greater_than_one, validate_odd
+from src.models.pseudoprimo_forte import PseudoPrimoForteModel
+from src.models.validators import validate_greater_than_one, validate_odd
 
 class TestPseudoPrimoForteModel:
     """Testes para PseudoPrimoForteModel."""
