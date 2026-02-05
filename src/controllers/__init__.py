@@ -1,3 +1,3 @@
-from src.controllers.algorithm_controller import ALGORITHMS, AlgorithmController
+from .algorithm_controller import AlgorithmController
 
-__all__ = ["AlgorithmController", "ALGORITHMS"]
+__all__ = ["AlgorithmController"]

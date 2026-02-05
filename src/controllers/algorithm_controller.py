@@ -29,7 +29,7 @@ def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
     with concurrent.futures.ThreadPoolExecutor() as executor:
         future = executor.submit(model.solve)
         try:
-            result = future.result(timeout=settings.TIMEOUT_SECONDS)
+            result: AlgorithmResult = future.result(timeout=settings.TIMEOUT_SECONDS)
             logger.info("Execução finalizada com sucesso: %s", algorithm_name)
             return result
         except concurrent.futures.TimeoutError:

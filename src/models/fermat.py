@@ -21,7 +21,7 @@ class FermatModel(BaseAlgorithm):
         self.n = n
 
     def solve(self) -> AlgorithmResult:
-        steps = []
+        steps: list[dict] = []
         n = self.n
 
         x = math.isqrt(n)

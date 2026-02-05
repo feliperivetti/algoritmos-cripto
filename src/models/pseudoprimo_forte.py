@@ -60,6 +60,7 @@ class PseudoPrimoForteModel(BaseAlgorithm):
         # Aplica o teste
         i = 0
         r = pow(b, q, n)
+        r_prev = b
 
         iteration_steps = []
 
