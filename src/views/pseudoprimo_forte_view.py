@@ -31,7 +31,7 @@ class PseudoPrimoForteView(BaseView):
         if result.steps:
             with st.expander("Passos"):
                 for s in result.steps:
-                    if s["resultado"] in (1, n-1):
+                    if s["resultado"] in (1, n - 1):
                         st.success(f"i={s['i']}: {s['base']}^{s['expoente']} ≡ {s['resultado']}")
                     else:
                         st.text(f"i={s['i']}: {s['base']}^{s['expoente']} ≡ {s['resultado']}")

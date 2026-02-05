@@ -5,6 +5,7 @@ Constantes de tema para a aplicação.
 
 class Theme:
     """Cores e estilos do tema."""
+
     PRIMARY = "#1E3A5F"
     SECONDARY = "#2563EB"
     SUCCESS = "#059669"

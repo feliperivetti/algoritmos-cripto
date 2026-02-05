@@ -64,11 +64,7 @@ class ModularExpView(BaseView):
 
             # Passo 4: Substituir a^remainder
             remainder_value = meta["remainders"].get(remainder_exp, pow(a, remainder_exp, n))
-            st.latex(
-                rf"{a}^{{{b}}} \equiv ({cycle_power}) \cdot ({remainder_value}) \pmod{{{n}}}"
-            )
+            st.latex(rf"{a}^{{{b}}} \equiv ({cycle_power}) \cdot ({remainder_value}) \pmod{{{n}}}")
 
             # Resultado final
-            st.latex(
-                rf"{a}^{{{b}}} \equiv \boxed{{{result.result}}} \pmod{{{n}}}"
-            )
+            st.latex(rf"{a}^{{{b}}} \equiv \boxed{{{result.result}}} \pmod{{{n}}}")

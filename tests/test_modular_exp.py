@@ -10,23 +10,24 @@ from src.models.modular_exp import ModularExpModel
 class TestModularExpModel:
     """Testes para ModularExpModel."""
 
-    @pytest.mark.parametrize("a, b, n, expected_result", [
-        # Casos Básicos
-        (2, 4, 5, 1),   # 2^4 = 16 = 1 mod 5
-        (3, 4, 7, 4),   # 3^4 = 81 = 4 mod 7
-        (5, 3, 13, 8),  # 5^3 = 125 = 8 mod 13
-
-        # Casos onde o ciclo é importante (b grande)
-        # 2^10 mod 5. Ciclo de 2 mod 5 é [2, 4, 3, 1] (tam 4). 10 % 4 = 2. Elemento índice 2 é 4.
-        # Espera: 1024 % 5 = 4.
-        (2, 10, 5, 4),
-
-        # Edge Cases
-        (10, 5, 1, 0),  # Mod 1 é sempre 0
-        (1, 100, 5, 1), # 1^b = 1
-        (5, 1, 10, 5),  # a^1 = a
-        (7, 0, 5, 1),   # a^0 = 1
-    ])
+    @pytest.mark.parametrize(
+        "a, b, n, expected_result",
+        [
+            # Casos Básicos
+            (2, 4, 5, 1),  # 2^4 = 16 = 1 mod 5
+            (3, 4, 7, 4),  # 3^4 = 81 = 4 mod 7
+            (5, 3, 13, 8),  # 5^3 = 125 = 8 mod 13
+            # Casos onde o ciclo é importante (b grande)
+            # 2^10 mod 5. Ciclo de 2 mod 5 é [2, 4, 3, 1] (tam 4).
+            # 10 % 4 = 2. Elemento índice 2 é 4. Espera: 1024 % 5 = 4.
+            (2, 10, 5, 4),
+            # Edge Cases
+            (10, 5, 1, 0),  # Mod 1 é sempre 0
+            (1, 100, 5, 1),  # 1^b = 1
+            (5, 1, 10, 5),  # a^1 = a
+            (7, 0, 5, 1),  # a^0 = 1
+        ],
+    )
     def test_calculo_modular(self, a, b, n, expected_result):
         """Testa o cálculo final de a^b mod n."""
         if n == 0:

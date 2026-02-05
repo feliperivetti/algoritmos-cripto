@@ -27,7 +27,7 @@ class EuclidesView(BaseView):
         c3.metric("β", beta)
 
         # Verificação
-        verification = alpha*a + beta*b
+        verification = alpha * a + beta * b
         st.latex(rf"({alpha}) \cdot ({a}) + ({beta}) \cdot ({b}) = {verification}")
         if verification == mdc:
             st.success("✓ Identidade de Bézout verificada")

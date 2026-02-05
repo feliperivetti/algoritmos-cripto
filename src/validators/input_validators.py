@@ -7,6 +7,7 @@ from src.models.base import ParamConfig
 @dataclass
 class ValidationResult:
     """Resultado de uma validação."""
+
     is_valid: bool
     value: Any = None
     error_message: str = ""
@@ -22,8 +23,7 @@ class InputValidator:
             return ValidationResult(True, int(value))
         except ValueError:
             return ValidationResult(
-                False,
-                error_message=f"{param_name} deve ser um número inteiro."
+                False, error_message=f"{param_name} deve ser um número inteiro."
             )
 
     @classmethod
@@ -45,10 +45,7 @@ class InputValidator:
         for validation_fn in param_config.validations:
             is_valid, error_msg = validation_fn(value)
             if not is_valid:
-                return ValidationResult(
-                    False,
-                    error_message=f"{param_config.label}: {error_msg}"
-                )
+                return ValidationResult(False, error_message=f"{param_config.label}: {error_msg}")
 
         return ValidationResult(True, value)
 

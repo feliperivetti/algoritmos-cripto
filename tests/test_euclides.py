@@ -10,27 +10,27 @@ from src.models.euclides import EuclidesModel, validate_non_zero
 class TestEuclidesModel:
     """Testes para EuclidesModel."""
 
-    @pytest.mark.parametrize("a, b, expected_mdc", [
-        # Casos Básicos
-        (48, 18, 6),
-        (18, 48, 6),  # Ordem invertida
-        (17, 13, 1),  # Primos entre si
-        (100, 20, 20), # Um múltiplo do outro
-
-        # Casos de Borda
-        (25, 25, 25), # Mesmo número
-        (500, 1, 1),  # Com 1
-        (1, 500, 1),
-
-        # Números Negativos (MDC deve ser positivo)
-        (-48, 18, 6),
-        (48, -18, 6),
-        (-48, -18, 6),
-
-        # Casos Maiores
-        (123456, 7890, 6),
-        (1071, 462, 21),
-    ])
+    @pytest.mark.parametrize(
+        "a, b, expected_mdc",
+        [
+            # Casos Básicos
+            (48, 18, 6),
+            (18, 48, 6),  # Ordem invertida
+            (17, 13, 1),  # Primos entre si
+            (100, 20, 20),  # Um múltiplo do outro
+            # Casos de Borda
+            (25, 25, 25),  # Mesmo número
+            (500, 1, 1),  # Com 1
+            (1, 500, 1),
+            # Números Negativos (MDC deve ser positivo)
+            (-48, 18, 6),
+            (48, -18, 6),
+            (-48, -18, 6),
+            # Casos Maiores
+            (123456, 7890, 6),
+            (1071, 462, 21),
+        ],
+    )
     def test_mdc_variados(self, a, b, expected_mdc):
         """Testa o cálculo do MDC para diversos cenários."""
         model = EuclidesModel(a, b)
@@ -48,12 +48,9 @@ class TestEuclidesModel:
 
         assert alpha * orig_a + beta * orig_b == expected_mdc
 
-    @pytest.mark.parametrize("valor, expected_valid", [
-        (0, False),
-        (1, True),
-        (-1, True),
-        (100, True)
-    ])
+    @pytest.mark.parametrize(
+        "valor, expected_valid", [(0, False), (1, True), (-1, True), (100, True)]
+    )
     def test_validacao_zero(self, valor, expected_valid):
         """Testa a função de validação de não-zero."""
         is_valid, msg = validate_non_zero(valor)

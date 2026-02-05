@@ -6,6 +6,7 @@ from typing import Any, Callable
 @dataclass
 class AlgorithmResult:
     """Resultado padronizado de qualquer algoritmo."""
+
     steps: list[dict] = field(default_factory=list)
     result: Any = None
     metadata: dict = field(default_factory=dict)
@@ -14,6 +15,7 @@ class AlgorithmResult:
 @dataclass
 class ParamConfig:
     """Configuração de um parâmetro de entrada."""
+
     name: str
     label: str
     validations: list[Callable[[int], tuple[bool, str]]] = field(default_factory=list)

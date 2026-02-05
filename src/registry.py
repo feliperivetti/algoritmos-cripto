@@ -16,10 +16,7 @@ class AlgorithmRegistry:
     @classmethod
     def register(cls, name: str, model_cls: Type[BaseAlgorithm], view_cls: Type[BaseView]) -> None:
         """Registra um novo algoritmo."""
-        cls._registry[name] = {
-            "model": model_cls,
-            "view": view_cls
-        }
+        cls._registry[name] = {"model": model_cls, "view": view_cls}
 
     @classmethod
     def get(cls, name: str) -> dict[str, Type]:

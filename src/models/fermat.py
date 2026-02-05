@@ -45,7 +45,7 @@ class FermatModel(BaseAlgorithm):
 
         factor1 = x - y
         factor2 = x + y
-        is_prime = (factor1 == 1 or factor2 == 1)
+        is_prime = factor1 == 1 or factor2 == 1
 
         return AlgorithmResult(
             steps=steps,
@@ -55,5 +55,5 @@ class FermatModel(BaseAlgorithm):
                 "factor2": factor2,
                 "is_prime": is_prime,
                 "n": self.n,
-            }
+            },
         )

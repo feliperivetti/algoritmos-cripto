@@ -25,11 +25,7 @@ def render_input_group(params: list, controller) -> dict:
     raw_inputs = {}
     for i, param in enumerate(params):
         with cols[i % len(cols)]:
-            value = st.text_input(
-                param.label,
-                key=param.name,
-                placeholder=f"Digite {param.label}"
-            )
+            value = st.text_input(param.label, key=param.name, placeholder=f"Digite {param.label}")
             raw_inputs[param.name] = value
 
     return raw_inputs

@@ -7,7 +7,8 @@ import streamlit as st
 
 def inject_custom_css() -> None:
     """Injeta CSS customizado na página."""
-    st.markdown("""
+    st.markdown(
+        """
     <style>
         /* Reset e base */
         .stApp {
@@ -54,4 +55,6 @@ def inject_custom_css() -> None:
             font-weight: 500;
         }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )

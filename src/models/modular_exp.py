@@ -74,5 +74,5 @@ class ModularExpModel(BaseAlgorithm):
                 "quotient": quotient,
                 "remainder_exp": remainder_exp,
                 "remainders": remainders,
-            }
+            },
         )

@@ -24,7 +24,5 @@ class AcharFatorView(BaseView):
             with st.expander(f"Passos ({len(result.steps)})"):
                 df = pd.DataFrame(result.steps)
                 st.dataframe(
-                    df.head(20) if len(df) > 20 else df,
-                    hide_index=False,
-                    use_container_width=True
+                    df.head(20) if len(df) > 20 else df, hide_index=False, use_container_width=True
                 )

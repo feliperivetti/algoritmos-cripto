@@ -42,10 +42,9 @@ def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
                     "error_message": (
                         f"Tempo limite excedido ({settings.TIMEOUT_SECONDS}s). "
                         "Tente números menores."
-                    )
-                }
+                    ),
+                },
             )
-
 
 
 class AlgorithmController:

@@ -44,18 +44,20 @@ class PseudoPrimoForteModel(BaseAlgorithm):
                 metadata={
                     "error": True,
                     "error_message": f"B ({b}) não pode ser múltiplo de N ({n}).",
-                }
+                },
             )
 
         # Decompõe n-1
         k, q = self._decompose(n)
 
-        steps.append({
-            "tipo": "decomposicao",
-            "k": k,
-            "q": q,
-            "n_minus_1": n - 1,
-        })
+        steps.append(
+            {
+                "tipo": "decomposicao",
+                "k": k,
+                "q": q,
+                "n_minus_1": n - 1,
+            }
+        )
 
         # Aplica o teste
         i = 0
@@ -65,12 +67,14 @@ class PseudoPrimoForteModel(BaseAlgorithm):
         iteration_steps = []
 
         while i < k:
-            iteration_steps.append({
-                "i": i,
-                "base": b if i == 0 else r_prev,  # noqa: F821
-                "expoente": q if i == 0 else 2,
-                "resultado": r,
-            })
+            iteration_steps.append(
+                {
+                    "i": i,
+                    "base": b if i == 0 else r_prev,  # noqa: F821
+                    "expoente": q if i == 0 else 2,
+                    "resultado": r,
+                }
+            )
 
             # Condição 1: i=0 e r=1
             if i == 0 and r == 1:
@@ -84,7 +88,7 @@ class PseudoPrimoForteModel(BaseAlgorithm):
                         "b": b,
                         "is_strong_pseudoprime": True,
                         "reason": "b^q ≡ 1 (mod n)",
-                    }
+                    },
                 )
 
             # Condição 2: r = n-1
@@ -99,7 +103,7 @@ class PseudoPrimoForteModel(BaseAlgorithm):
                         "b": b,
                         "is_strong_pseudoprime": True,
                         "reason": f"Encontrou r ≡ -1 (mod n) em i={i}",
-                    }
+                    },
                 )
 
             i += 1
@@ -117,5 +121,5 @@ class PseudoPrimoForteModel(BaseAlgorithm):
                 "b": b,
                 "is_strong_pseudoprime": False,
                 "reason": f"{n} é composto (não é pseudoprimo forte na base {b})",
-            }
+            },
         )

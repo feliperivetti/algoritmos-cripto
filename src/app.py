@@ -23,7 +23,8 @@ st.set_page_config(
 )
 
 # CSS com acentos azuis
-st.markdown("""
+st.markdown(
+    """
 <style>
     /* Esconder elementos do Streamlit */
     #MainMenu {visibility: hidden;}
@@ -91,7 +92,9 @@ st.markdown("""
         color: #64748B !important;
     }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 
 def main():
@@ -103,7 +106,7 @@ def main():
     selected = st.selectbox(
         "Selecione o algoritmo",
         algorithm_list,
-        format_func=lambda x: f"{get_algorithm_info(x).get('icon', '')} {x}"
+        format_func=lambda x: f"{get_algorithm_info(x).get('icon', '')} {x}",
     )
 
     if not selected:
@@ -133,9 +136,7 @@ def main():
     for i, param in enumerate(params):
         with cols[i]:
             raw_inputs[param.name] = st.text_input(
-                param.label,
-                key=param.name,
-                placeholder=f"Digite {param.label}"
+                param.label, key=param.name, placeholder=f"Digite {param.label}"
             )
 
     col1, col2, col3 = st.columns([1, 1, 1])

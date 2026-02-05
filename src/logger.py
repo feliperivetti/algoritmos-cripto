@@ -21,16 +21,14 @@ def setup_logging(log_level: str = settings.LOG_LEVEL) -> None:
     log_file = settings.LOG_FILE
 
     # Formato do log
-    formatter = logging.Formatter(
-        "[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s"
-    )
+    formatter = logging.Formatter("[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s")
 
     # Handler para Arquivo (Rotativo)
     file_handler = RotatingFileHandler(
         log_file,
         maxBytes=5 * 1024 * 1024,  # 5 MB
         backupCount=3,
-        encoding="utf-8"
+        encoding="utf-8",
     )
     file_handler.setFormatter(formatter)
 

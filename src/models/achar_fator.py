@@ -46,5 +46,5 @@ class AcharFatorModel(BaseAlgorithm):
                 "factor": factor,
                 "is_prime": is_prime,
                 "steps_count": steps_count if not is_prime else len(steps),
-            }
+            },
         )

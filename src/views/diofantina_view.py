@@ -15,14 +15,14 @@ class DiofantinaView(BaseView):
             st.error(f"Sem solução: {meta.get('reason', 'MDC não divide c')}")
             return
 
-        a, b, c = meta['a'], meta['b'], meta['c']
-        mdc = meta['mdc']
-        alpha = meta['alpha']
-        beta = meta['beta']
-        x0, y0 = meta['x0'], meta['y0']
-        divisor = meta['divisor']
-        x_coef = meta['x_coef']
-        y_coef = meta['y_coef']
+        a, b, c = meta["a"], meta["b"], meta["c"]
+        mdc = meta["mdc"]
+        alpha = meta["alpha"]
+        beta = meta["beta"]
+        x0, y0 = meta["x0"], meta["y0"]
+        divisor = meta["divisor"]
+        x_coef = meta["x_coef"]
+        y_coef = meta["y_coef"]
 
         # Resultado em destaque
         st.success(f"**Solução encontrada:** X₀ = {x0}, Y₀ = {y0}")

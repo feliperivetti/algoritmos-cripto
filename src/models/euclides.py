@@ -76,5 +76,5 @@ class EuclidesModel(BaseAlgorithm):
                 "beta": y_prev,
                 "original_a": self.a,
                 "original_b": self.b,
-            }
+            },
         )

@@ -49,7 +49,7 @@ class DiofantinaModel(BaseAlgorithm):
                     "has_solution": False,
                     "reason": f"c ({self.c}) não é divisível pelo MDC ({mdc})",
                     "euclides_result": euclides_result,
-                }
+                },
             )
 
         # Calcula solução particular
@@ -78,5 +78,5 @@ class DiofantinaModel(BaseAlgorithm):
                 "b": self.b,
                 "c": self.c,
                 "euclides_result": euclides_result,
-            }
+            },
         )

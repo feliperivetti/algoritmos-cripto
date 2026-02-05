@@ -27,10 +27,7 @@ def render_result_card(content: str, variant: str = "default") -> None:
 
 
 def render_highlight_box(
-    title: str,
-    value: str,
-    subtitle: Optional[str] = None,
-    variant: str = "default"
+    title: str, value: str, subtitle: Optional[str] = None, variant: str = "default"
 ) -> None:
     """Renderiza uma caixa de destaque para resultados importantes."""
 
