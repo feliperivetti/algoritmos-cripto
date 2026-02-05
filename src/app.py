@@ -6,7 +6,11 @@ import streamlit as st
 
 from src.algorithm_info import get_algorithm_info
 from src.controllers.algorithm_controller import AlgorithmController
+from src.logger import setup_logging
 from src.registry import AlgorithmRegistry, load_algorithms
+
+# Configura Logger
+setup_logging()
 
 # Carrega algoritmos
 load_algorithms()

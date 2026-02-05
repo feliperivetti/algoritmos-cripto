@@ -1,4 +1,5 @@
 import concurrent.futures
+import logging
 from typing import Type
 
 import streamlit as st
@@ -10,6 +11,8 @@ from src.views.base_view import BaseView
 
 TIMEOUT_SECONDS = 20
 
+logger = logging.getLogger(__name__)
+
 
 @st.cache_data(show_spinner=False)
 def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
@@ -17,6 +20,8 @@ def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
     Executa o algoritmo com cache e limite de tempo.
     Se exceder TIMEOUT_SECONDS, retorna um resultado de erro (que também é cacheado).
     """
+    logger.info("Executando: %s com params=%s", algorithm_name, params)
+
     config = AlgorithmRegistry.get(algorithm_name)
     model_class = config["model"]
     model = model_class(**params)
@@ -24,8 +29,11 @@ def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
     with concurrent.futures.ThreadPoolExecutor() as executor:
         future = executor.submit(model.solve)
         try:
-            return future.result(timeout=TIMEOUT_SECONDS)
+            result = future.result(timeout=TIMEOUT_SECONDS)
+            logger.info("Execução finalizada com sucesso: %s", algorithm_name)
+            return result
         except concurrent.futures.TimeoutError:
+            logger.warning("Timeout excedido para: %s", algorithm_name)
             return AlgorithmResult(
                 steps=[],
                 result=None,
