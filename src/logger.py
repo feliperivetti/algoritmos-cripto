@@ -2,21 +2,23 @@ import logging
 import os
 from logging.handlers import RotatingFileHandler
 
+from src.config import settings
 
-def setup_logging(log_level: int = logging.INFO) -> None:
+
+def setup_logging(log_level: str = settings.LOG_LEVEL) -> None:
     """
     Configura o sistema de logging da aplicação.
 
     Cria uma pasta 'logs/' se não existir e define dois handlers:
-    1. RotatingFileHandler: Grava em 'logs/app.log' (max 5MB, 3 backups)
+    1. RotatingFileHandler: Grava em settings.LOG_FILE (max 5MB, 3 backups)
     2. StreamHandler: Grava no console (stdout)
     """
     # Cria diretório de logs se necessário
-    log_dir = "logs"
-    if not os.path.exists(log_dir):
+    log_dir = os.path.dirname(settings.LOG_FILE)
+    if log_dir and not os.path.exists(log_dir):
         os.makedirs(log_dir)
 
-    log_file = os.path.join(log_dir, "app.log")
+    log_file = settings.LOG_FILE
 
     # Formato do log
     formatter = logging.Formatter(

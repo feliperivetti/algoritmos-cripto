@@ -4,12 +4,11 @@ from typing import Type
 
 import streamlit as st
 
+from src.config import settings
 from src.models.base import AlgorithmResult, BaseAlgorithm
 from src.registry import AlgorithmRegistry
 from src.validators.input_validators import InputValidator
 from src.views.base_view import BaseView
-
-TIMEOUT_SECONDS = 20
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +17,7 @@ logger = logging.getLogger(__name__)
 def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
     """
     Executa o algoritmo com cache e limite de tempo.
-    Se exceder TIMEOUT_SECONDS, retorna um resultado de erro (que também é cacheado).
+    Se exceder settings.TIMEOUT_SECONDS, retorna um resultado de erro (que também é cacheado).
     """
     logger.info("Executando: %s com params=%s", algorithm_name, params)
 
@@ -29,7 +28,7 @@ def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
     with concurrent.futures.ThreadPoolExecutor() as executor:
         future = executor.submit(model.solve)
         try:
-            result = future.result(timeout=TIMEOUT_SECONDS)
+            result = future.result(timeout=settings.TIMEOUT_SECONDS)
             logger.info("Execução finalizada com sucesso: %s", algorithm_name)
             return result
         except concurrent.futures.TimeoutError:
@@ -40,7 +39,7 @@ def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
                 metadata={
                     "error": True,
                     "error_message": (
-                        f"Tempo limite excedido ({TIMEOUT_SECONDS}s). "
+                        f"Tempo limite excedido ({settings.TIMEOUT_SECONDS}s). "
                         "Tente números menores."
                     )
                 }
