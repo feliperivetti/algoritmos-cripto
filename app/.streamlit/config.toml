@@ -1,7 +1,0 @@
-[theme]
-base = "dark"
-primaryColor = "#FF4B4B"                # vermelho vibrante
-backgroundColor = "#0E1117"             # fundo escuro padrão do Streamlit
-secondaryBackgroundColor = "#262730"    # fundo de painéis e caixas
-textColor = "#FAFAFA"                   # texto branco/suave
-font = "sans serif"
