@@ -22,4 +22,4 @@ class FermatView(BaseView):
         
         if result.steps:
             with st.expander("Passos"):
-                st.dataframe(pd.DataFrame(result.steps), hide_index=True)
+                st.dataframe(pd.DataFrame(result.steps), hide_index=False, use_container_width=True)

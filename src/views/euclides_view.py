@@ -34,7 +34,7 @@ class EuclidesView(BaseView):
         # Passos
         if not nested:
             with st.expander("Passos do Algoritmo"):
-                st.dataframe(pd.DataFrame(result.steps), hide_index=True)
+                st.dataframe(pd.DataFrame(result.steps), hide_index=False, use_container_width=True)
         else:
             st.caption("Passos:")
-            st.dataframe(pd.DataFrame(result.steps), hide_index=True)
+            st.dataframe(pd.DataFrame(result.steps), hide_index=False, use_container_width=True)
