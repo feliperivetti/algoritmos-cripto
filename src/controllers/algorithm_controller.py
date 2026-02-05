@@ -1,11 +1,43 @@
+import concurrent.futures
 from typing import Type
 
 import streamlit as st
 
-from src.models.base import BaseAlgorithm
+from src.models.base import AlgorithmResult, BaseAlgorithm
 from src.registry import AlgorithmRegistry
 from src.validators.input_validators import InputValidator
 from src.views.base_view import BaseView
+
+TIMEOUT_SECONDS = 20
+
+
+@st.cache_data(show_spinner=False)
+def _run_algorithm_cached(algorithm_name: str, params: dict) -> AlgorithmResult:
+    """
+    Executa o algoritmo com cache e limite de tempo.
+    Se exceder TIMEOUT_SECONDS, retorna um resultado de erro (que também é cacheado).
+    """
+    config = AlgorithmRegistry.get(algorithm_name)
+    model_class = config["model"]
+    model = model_class(**params)
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(model.solve)
+        try:
+            return future.result(timeout=TIMEOUT_SECONDS)
+        except concurrent.futures.TimeoutError:
+            return AlgorithmResult(
+                steps=[],
+                result=None,
+                metadata={
+                    "error": True,
+                    "error_message": (
+                        f"Tempo limite excedido ({TIMEOUT_SECONDS}s). "
+                        "Tente números menores."
+                    )
+                }
+            )
+
 
 
 class AlgorithmController:
@@ -53,9 +85,8 @@ class AlgorithmController:
                 st.error(error)
             return
 
-        # Execução do Model
-        model = self.model_class(**result)
-        algorithm_result = model.solve()
+        # Execução do Model (Cached)
+        algorithm_result = _run_algorithm_cached(self.algorithm_name, result)
 
         # Renderização via View
         view = self.view_class()
