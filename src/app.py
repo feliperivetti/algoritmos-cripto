@@ -2,6 +2,12 @@
 Entry point para o Streamlit.
 """
 
+import os
+import sys
+
+# Garante que o diretório raiz está no PYTHONPATH (necessário para Streamlit Cloud)
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import streamlit as st
 
 from src.algorithm_info import get_algorithm_info
