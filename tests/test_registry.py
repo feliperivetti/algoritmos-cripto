@@ -1,5 +1,5 @@
+
 import pytest
-from typing import Type
 
 from src.exceptions import AlgorithmNotFoundError
 from src.models.base import BaseAlgorithm
@@ -27,7 +27,7 @@ class TestAlgorithmRegistry:
     def test_register_and_get(self):
         """Testa o registro e recuperação de um algoritmo."""
         AlgorithmRegistry.register("mock_algo", MockModel, MockView)
-        
+
         config = AlgorithmRegistry.get("mock_algo")
         assert config["model"] == MockModel
         assert config["view"] == MockView
@@ -36,5 +36,5 @@ class TestAlgorithmRegistry:
         """Testa se lança exceção correta para algoritmo inexistente."""
         with pytest.raises(AlgorithmNotFoundError) as excinfo:
             AlgorithmRegistry.get("nao_existe")
-        
+
         assert "Algoritmo não encontrado: nao_existe" in str(excinfo.value)
