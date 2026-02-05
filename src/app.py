@@ -8,12 +8,12 @@ import sys
 # Garante que o diretório raiz está no PYTHONPATH (necessário para Streamlit Cloud)
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import streamlit as st
+import streamlit as st  # noqa: E402
 
-from src.algorithm_info import get_algorithm_info
-from src.controllers.algorithm_controller import AlgorithmController
-from src.logger import setup_logging
-from src.registry import AlgorithmRegistry, load_algorithms
+from src.algorithm_info import get_algorithm_info  # noqa: E402
+from src.controllers.algorithm_controller import AlgorithmController  # noqa: E402
+from src.logger import setup_logging  # noqa: E402
+from src.registry import AlgorithmRegistry, load_algorithms  # noqa: E402
 
 # Configura Logger
 setup_logging()
