@@ -1,6 +1,6 @@
+mypy==1.19.1
 pandas==2.2.0
+pydantic-settings==2.1.0
 pytest==8.0.0
-streamlit
-ruff
-mypy
-pydantic-settings==1.31.0
+ruff==0.1.9
+streamlit==1.54.0
