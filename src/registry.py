@@ -3,6 +3,7 @@ Módulo responsavel pelo registro centralizado de algoritmos.
 """
 from typing import Type
 
+from src.exceptions import AlgorithmNotFoundError
 from src.models.base import BaseAlgorithm
 from src.views.base_view import BaseView
 
@@ -24,7 +25,7 @@ class AlgorithmRegistry:
     def get(cls, name: str) -> dict[str, Type]:
         """Retorna a configuração de um algoritmo."""
         if name not in cls._registry:
-            raise ValueError(f"Algoritmo não encontrado: {name}")
+            raise AlgorithmNotFoundError(name)
         return cls._registry[name]
 
     @classmethod

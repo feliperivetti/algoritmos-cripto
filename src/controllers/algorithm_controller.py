@@ -5,6 +5,7 @@ from typing import Type
 import streamlit as st
 
 from src.config import settings
+from src.exceptions import AlgorithmNotFoundError
 from src.models.base import AlgorithmResult, BaseAlgorithm
 from src.registry import AlgorithmRegistry
 from src.validators.input_validators import InputValidator
@@ -53,7 +54,7 @@ class AlgorithmController:
     def __init__(self, algorithm_name: str):
         try:
             config = AlgorithmRegistry.get(algorithm_name)
-        except ValueError as err:
+        except AlgorithmNotFoundError as err:
             raise ValueError(f"Algoritmo desconhecido: {algorithm_name}") from err
 
         self.model_class: Type[BaseAlgorithm] = config["model"]
