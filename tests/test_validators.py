@@ -2,12 +2,14 @@
 Testes para os validadores centralizados.
 """
 import pytest
+
 from src.models.validators import (
-    validate_non_zero,
-    validate_positive,
     validate_greater_than_one,
-    validate_odd
+    validate_non_zero,
+    validate_odd,
+    validate_positive,
 )
+
 
 class TestValidators:
     """Suite de testes para funções de validação."""

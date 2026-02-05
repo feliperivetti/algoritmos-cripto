@@ -1,6 +1,8 @@
 import pytest
+
 from src.models.pseudoprimo_forte import PseudoPrimoForteModel
-from src.models.validators import validate_greater_than_one, validate_odd
+from src.models.validators import validate_odd
+
 
 class TestPseudoPrimoForteModel:
     """Testes para PseudoPrimoForteModel."""
@@ -10,12 +12,12 @@ class TestPseudoPrimoForteModel:
         (17, 3, True),
         (13, 2, True),
         (101, 5, True),
-        
+
         # Compostos (Devem retornar False geralmente)
         (15, 2, False),  # 15 = 3 * 5
         (9, 2, False),   # 9 = 3 * 3
         (35, 2, False),  # 35 = 5 * 7
-        
+
         # Pseudoprimo Forte (Edge Case: Composto que passa no teste para base específica)
         # 2047 = 23 * 89.
         # 2^2046 mod 2047 = 1.
@@ -25,7 +27,7 @@ class TestPseudoPrimoForteModel:
         """Testa verificação de pseudoprimo forte."""
         model = PseudoPrimoForteModel(n, b)
         result = model.solve()
-        
+
         assert result.result == expected_result
         assert result.metadata["is_strong_pseudoprime"] == expected_result
         assert result.metadata["b"] == b
@@ -39,7 +41,7 @@ class TestPseudoPrimoForteModel:
         """Testa validações específicas dentro do método solve (ex: b multiplo de n)."""
         model = PseudoPrimoForteModel(n, b)
         result = model.solve()
-        
+
         # Verifica se retornou erro
         assert result.result is None
         assert result.metadata.get("error") is True

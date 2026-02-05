@@ -2,8 +2,9 @@
 Componentes de layout.
 """
 
-import streamlit as st
 from typing import Optional
+
+import streamlit as st
 
 
 def render_page_header(title: str, subtitle: Optional[str] = None) -> None:

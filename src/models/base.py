@@ -21,17 +21,17 @@ class ParamConfig:
 
 class BaseAlgorithm(ABC):
     """Classe base para todos os algoritmos."""
-    
+
     name: str = "Algoritmo Base"
     description: str = ""
     input_format_latex: str = ""
-    
+
     @classmethod
     @abstractmethod
     def get_params(cls) -> list[ParamConfig]:
         """Retorna lista de parâmetros com nome, label e validações."""
         pass
-    
+
     @abstractmethod
     def solve(self) -> AlgorithmResult:
         """Executa o algoritmo e retorna resultado estruturado."""

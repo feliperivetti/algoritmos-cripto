@@ -1,4 +1,5 @@
 import pytest
+
 from src.models.fermat import FermatModel
 from src.models.validators import validate_odd, validate_positive
 
@@ -16,10 +17,10 @@ class TestFermatModel:
         """Testa fatoração de números compostos ímpares."""
         model = FermatModel(n)
         result = model.solve()
-        
+
         f1 = result.metadata["factor1"]
         f2 = result.metadata["factor2"]
-        
+
         # Verifica se o produto é N
         assert f1 * f2 == n
         # Verifica se os fatores são os esperados
@@ -37,10 +38,10 @@ class TestFermatModel:
         """Testa quadrados perfeitos (N = root * root)."""
         model = FermatModel(n)
         result = model.solve()
-        
+
         f1 = result.metadata["factor1"]
         f2 = result.metadata["factor2"]
-        
+
         assert f1 * f2 == n
         assert f1 == root
         assert f2 == root
@@ -56,11 +57,11 @@ class TestFermatModel:
         """Testa se números primos são identificados corretamente (fator 1 e N)."""
         model = FermatModel(n)
         result = model.solve()
-        
+
         f1 = result.metadata["factor1"]
         f2 = result.metadata["factor2"]
         is_prime = result.metadata["is_prime"]
-        
+
         assert f1 * f2 == n
         assert {f1, f2} == {1, n}
         assert is_prime is True

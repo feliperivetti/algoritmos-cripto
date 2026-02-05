@@ -6,7 +6,7 @@ INFO = {
     "icon": "🎯",
     "short": "Fatora números usando diferença de quadrados",
     "description": """
-O **Método de Fatoração de Fermat** baseia-se na representação de um 
+O **Método de Fatoração de Fermat** baseia-se na representação de um
 número ímpar N como diferença de dois quadrados:
 
 $$N = a^2 - b^2 = (a+b)(a-b)$$

@@ -25,6 +25,15 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install pytest  # Ensure pytest is installed even if not in requirements
 
+    - name: Lint with Ruff
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        ruff check . --output-format=github
+
+    - name: Type Check with MyPy
+      run: |
+        mypy .
+
     - name: Run Tests with pytest
       run: |
         export PYTHONPATH=$PYTHONPATH:$(pwd)

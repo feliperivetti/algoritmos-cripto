@@ -5,11 +5,11 @@ Importa as informações de cada algoritmo dos arquivos separados.
 """
 
 from src.algorithm_info import (
-    euclides,
+    achar_fator,
     diofantina,
+    euclides,
     fermat,
     modular_exp,
-    achar_fator,
     pseudoprimo_forte,
 )
 

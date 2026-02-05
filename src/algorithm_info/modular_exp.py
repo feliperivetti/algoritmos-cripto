@@ -10,7 +10,7 @@ A **Exponenciação Modular** calcula eficientemente:
 
 $$a^b \\mod n$$
 
-O algoritmo encontra um ciclo nas potências de `a` módulo `n` e 
+O algoritmo encontra um ciclo nas potências de `a` módulo `n` e
 usa isso para calcular o resultado sem computar a potência completa.
 
 **Quando usar:**

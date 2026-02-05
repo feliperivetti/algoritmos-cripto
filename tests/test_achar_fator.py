@@ -1,6 +1,8 @@
 import pytest
+
 from src.models.achar_fator import AcharFatorModel
 from src.models.validators import validate_greater_than_one
+
 
 class TestAcharFatorModel:
     """Testes para AcharFatorModel."""
@@ -12,7 +14,7 @@ class TestAcharFatorModel:
         (35, 5, False),   # 5 * 7
         (49, 7, False),   # 7 * 7
         (4, 2, False),    # 2 * 2
-        
+
         # Primos
         (17, 17, True),
         (13, 13, True),
@@ -23,11 +25,11 @@ class TestAcharFatorModel:
         """Testa se encontra um fator ou identifica como primo."""
         model = AcharFatorModel(n)
         result = model.solve()
-        
+
         # O resultado é o fator encontrado ou o próprio N se primo
         assert result.result == expected
         assert result.metadata["is_prime"] == is_prime
-        
+
         # Se não é primo, valida que o resultado realmente divide N
         if not is_prime:
             assert n % result.result == 0

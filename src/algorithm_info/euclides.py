@@ -6,8 +6,8 @@ INFO = {
     "icon": "🔢",
     "short": "Calcula o MDC e os coeficientes de Bézout",
     "description": """
-O **Algoritmo Euclidiano Estendido** calcula o Máximo Divisor Comum (MDC) 
-de dois números inteiros e encontra os coeficientes α e β que satisfazem 
+O **Algoritmo Euclidiano Estendido** calcula o Máximo Divisor Comum (MDC)
+de dois números inteiros e encontra os coeficientes α e β que satisfazem
 a **Identidade de Bézout**:
 
 $$MDC(A, B) = α \\cdot A + β \\cdot B$$
